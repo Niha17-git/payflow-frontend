@@ -1,59 +1,48 @@
-# PayflowFrontend
+# PayFlow Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+Angular frontend for PayFlow, a payment reconciliation platform. Provides a dashboard and management screens for finance teams to track orders, payments, reconciliation results, and exceptions.
 
-## Development server
+## Features
+- JWT-based login and registration
+- Role-based access (Admin, FinanceUser)
+- Dashboard with live reconciliation summary (orders, payments, matched/open exceptions)
+- Order management with inline customer creation
+- Payments list and bulk CSV import
+- Manual reconciliation trigger per order
+- Exception resolution workflow with audit trail
+- Audit log viewer
+- Route guarding — protected pages redirect unauthenticated users to login
 
-To start a local development server, run:
+## Tech Stack
+- Angular (standalone components, latest CLI)
+- TypeScript
+- RxJS
+- JWT auth via HTTP interceptor
 
-```bash
-ng serve
-```
+## Architecture Notes
+- **Route guard** (`authGuard`) protects all pages behind login using `canActivate`, redirecting unauthenticated users to `/login`.
+- **HTTP interceptor** automatically attaches the JWT token to every outgoing API request, so individual services don't need to handle auth headers manually.
+- **Manual change detection** (`ChangeDetectorRef.detectChanges()`) is used after async data loads in several components, since this Angular version defaults to zoneless change detection and doesn't automatically re-render after data arrives inside an RxJS subscription.
+- Dashboard summary cards are clickable, linking directly to the relevant management page (Orders, Payments, Reconciliation, Exceptions) for quick navigation.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Getting Started
 
-## Code scaffolding
+### Prerequisites
+- Node.js and npm
+- The [PayFlow API](https://github.com/Niha17-git/payflow-api) running locally on `https://localhost:7212`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Setup
+1. Clone the repo
+2. Install dependencies: npm install
+3. Run the dev server: ng serve
+4. Open `http://localhost:4200`
 
-```bash
-ng generate component component-name
-```
+### Notes
+- CORS must be enabled on the backend for `http://localhost:4200` (already configured in the API's `Program.cs`).
+- Register a new Admin or FinanceUser account via the app's Register page, or through the API's Swagger UI.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Related project
+Backend (ASP.NET Core API): [payflow-api](https://github.com/Niha17-git/payflow-api)
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Author
+Built by [Niharika Reddy] as a portfolio project, alongside Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), and Azure AI Fundamentals (AI-900) certifications.
