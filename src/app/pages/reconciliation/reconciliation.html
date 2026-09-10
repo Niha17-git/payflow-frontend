@@ -1,0 +1,18 @@
+<h1>Reconciliation</h1>
+<div class="run-card">
+  <input type="number" [(ngModel)]="orderIdToRun" placeholder="Order ID">
+  <button (click)="runReconciliation()">Run Reconciliation</button>
+</div>
+
+<table>
+  <thead><tr><th>Order</th><th>Expected</th><th>Received</th><th>Difference</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr *ngFor="let r of results">
+      <td>{{ r.orderNumber }}</td>
+      <td>₹{{ r.expectedAmount }}</td>
+      <td>₹{{ r.receivedAmount }}</td>
+      <td>₹{{ r.difference }}</td>
+      <td><span class="badge" [ngClass]="(r.matchStatus || '').toLowerCase()">{{ r.matchStatus }}</span></td>
+    </tr>
+  </tbody>
+</table>

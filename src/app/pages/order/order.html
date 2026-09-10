@@ -1,0 +1,61 @@
+<div class="header-row">
+  <h1>Orders</h1>
+  <button (click)="showForm = !showForm">{{ showForm ? 'Cancel' : '+ New Order' }}</button>
+</div>
+
+<div class="form-card" *ngIf="showForm">
+  <div class="form-row">
+    <input type="text" [(ngModel)]="newOrder.orderNumber" placeholder="Order Number">
+
+    <select [(ngModel)]="newOrder.customerId">
+      <option [ngValue]="null" disabled>Select Customer</option>
+      <option *ngFor="let c of customers" [ngValue]="c.customerId">{{ c.fullName }}</option>
+    </select>
+
+    <button class="link-btn" (click)="showNewCustomerForm = !showNewCustomerForm">
+      {{ showNewCustomerForm ? 'Cancel' : '+ New Customer' }}
+    </button>
+
+    <input type="number" [(ngModel)]="newOrder.amount" placeholder="Amount">
+
+    <select [(ngModel)]="newOrder.status">
+      <option value="Pending">Pending</option>
+      <option value="Paid">Paid</option>
+      <option value="Refunded">Refunded</option>
+    </select>
+
+    <button class="submit-btn" (click)="createOrder()">Create Order</button>
+  </div>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="inline-customer-form" *ngIf="showNewCustomerForm">
+    <input type="text" [(ngModel)]="newCustomer.fullName" placeholder="Customer Name">
+    <input type="email" [(ngModel)]="newCustomer.email" placeholder="Email">
+    <input type="text" [(ngModel)]="newCustomer.phoneNumber" placeholder="Phone Number">
+    <button class="submit-btn small" (click)="createCustomer()">Save Customer</button>
+    <p class="error" *ngIf="customerErrorMessage">{{ customerErrorMessage }}</p>
+  </div>
+</div>
+
+<p class="total-count">Total orders: {{ orders.length }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Customer</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Order Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderNumber }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>₹{{ order.amount }}</td>
+      <td><span class="badge" [ngClass]="(order.status || '').toLowerCase()">{{ order.status }}</span></td>
+      <td>{{ order.orderDate | date:'short' }}</td>
+    </tr>
+  </tbody>
+</table>

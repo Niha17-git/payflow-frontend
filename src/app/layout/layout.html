@@ -1,0 +1,18 @@
+<div class="shell">
+  <aside class="sidebar">
+    <h2>PayFlow</h2>
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active">🏠 Dashboard</a>
+      <a routerLink="/orders" routerLinkActive="active">📦 Orders</a>
+      <a routerLink="/payments" routerLinkActive="active">💳 Payments</a>
+      <a routerLink="/payment-import" routerLinkActive="active">📥 Import Payments</a>
+      <a routerLink="/reconciliation" routerLinkActive="active">🔄 Reconciliation</a>
+      <a routerLink="/exceptions" routerLinkActive="active">⚠️ Exceptions</a>
+      <a routerLink="/audit-logs" routerLinkActive="active">📋 Audit Logs</a>
+    </nav>
+    <button class="logout" (click)="logout()">🚪 Logout</button>
+  </aside>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

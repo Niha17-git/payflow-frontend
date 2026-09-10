@@ -1,0 +1,25 @@
+
+<h1>Exceptions</h1>
+<table>
+  <thead><tr><th>Order Number</th><th>Type</th><th>Description</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+    <tr *ngFor="let ex of exceptions">
+      <td>{{ ex.orderNumber }}</td>
+      <td>{{ ex.exceptionType }}</td>
+      <td>{{ ex.description }}</td>
+      <td><span class="badge" [ngClass]="(ex.status || '').toLowerCase()">{{ ex.status }}</span></td>
+      <td><button *ngIf="ex.status === 'Open'" (click)="openResolve(ex.id)">Resolve</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal-backdrop" *ngIf="activeId !== null">
+  <div class="modal">
+    <h3>Resolve Exception</h3>
+    <textarea [(ngModel)]="resolutionNotes" rows="4" placeholder="Resolution notes..."></textarea>
+    <div class="modal-actions">
+      <button (click)="activeId = null">Cancel</button>
+      <button class="primary" (click)="submitResolve()">Submit</button>
+    </div>
+  </div>
+</div>

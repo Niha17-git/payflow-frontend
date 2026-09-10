@@ -1,0 +1,40 @@
+<div *ngIf="summary">
+  <h1>Payment Reconciliation Dashboard</h1>
+
+  <div class="grid">
+    <div class="card clickable" (click)="goTo('/orders')">
+      <span class="label">Orders</span>
+      <span class="value">{{ summary.totalOrders }}</span>
+    </div>
+
+    <div class="card clickable" (click)="goTo('/payments')">
+      <span class="label">Payments</span>
+      <span class="value">{{ summary.totalPayments }}</span>
+    </div>
+
+    <div class="card matched clickable" (click)="goTo('/reconciliation')">
+      <span class="label">Matched</span>
+      <span class="value">{{ summary.matchedCount }}</span>
+    </div>
+
+    <div class="card exceptions clickable" (click)="goTo('/exceptions')">
+      <span class="label">Open Exceptions</span>
+      <span class="value">{{ summary.openExceptions }}</span>
+    </div>
+  </div>
+
+  <h2>Recent Exceptions</h2>
+  <table>
+    <thead><tr><th>Order</th><th>Type</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let ex of recentExceptions" class="clickable-row" (click)="goTo('/exceptions')">
+        <td>{{ ex.orderNumber }}</td>
+        <td>{{ ex.exceptionType }}</td>
+        <td><span class="badge" [ngClass]="(ex.status || '').toLowerCase()">{{ ex.status }}</span></td>
+      </tr>
+      <tr *ngIf="recentExceptions.length === 0">
+        <td colspan="3">No recent exceptions found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

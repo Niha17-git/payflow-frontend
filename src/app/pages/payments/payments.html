@@ -1,0 +1,22 @@
+<h1>Payments</h1>
+<p>Total payments: {{ payments.length }}</p>
+<table>
+  <thead>
+    <tr>
+      <th>Transaction ID</th>
+      <th>Order Number</th>
+      <th>Amount</th>
+      <th>Method</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of payments">
+      <td>{{ p.transactionId }}</td>
+      <td>{{ p.orderNumber }}</td>
+      <td>₹{{ p.amount }}</td>
+      <td>{{ p.paymentMethod }}</td>
+      <td>{{ p.paymentDate }}</td>
+    </tr>
+  </tbody>
+</table>

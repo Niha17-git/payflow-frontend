@@ -1,0 +1,10 @@
+.shell { display: flex; min-height: 100vh; font-family: 'Segoe UI', sans-serif; background: #f4f6f8; }
+.sidebar { width: 220px; background: #1a1a2e; color: white; display: flex; flex-direction: column; padding: 24px 0; }
+.sidebar h2 { padding: 0 24px; margin: 0 0 24px 0; }
+.sidebar nav { display: flex; flex-direction: column; flex: 1; }
+.sidebar nav a { color: #ccc; text-decoration: none; padding: 12px 24px; font-size: 14px; }
+.sidebar nav a:hover { background: #26264a; color: white; }
+.sidebar nav a.active { background: #4f46e5; color: white; }
+.logout { margin: 0 24px; padding: 10px; background: transparent; border: 1px solid #444; color: #ccc; border-radius: 6px; cursor: pointer; }
+.logout:hover { background: #26264a; color: white; }
+.content { flex: 1; padding: 32px; }

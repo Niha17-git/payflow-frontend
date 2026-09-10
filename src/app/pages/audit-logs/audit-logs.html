@@ -1,0 +1,12 @@
+<h1>Audit Logs</h1>
+<table>
+  <thead><tr><th>Action</th><th>Entity</th><th>Details</th><th>Date</th></tr></thead>
+  <tbody>
+    <tr *ngFor="let log of logs">
+      <td>{{ log.action }}</td>
+      <td>{{ log.entityName }} #{{ log.entityId }}</td>
+      <td>{{ log.details }}</td>
+      <td>{{ log.createdAt }}</td>
+    </tr>
+  </tbody>
+</table>

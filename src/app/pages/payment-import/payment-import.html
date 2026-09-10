@@ -1,0 +1,16 @@
+<h1>Import Payment Statement</h1>
+<div class="upload-card">
+  <input type="file" accept=".csv" (change)="onFileSelected($event)">
+  <button (click)="upload()">Import Payments</button>
+</div>
+
+<p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+<div class="result" *ngIf="result">
+  <h3>Import Result</h3>
+  <p><strong>Imported:</strong> {{ result.imported }}</p>
+  <p><strong>Skipped:</strong> {{ result.skipped.length }}</p>
+  <ul>
+    <li *ngFor="let s of result.skipped">{{ s }}</li>
+  </ul>
+</div>
